@@ -58,3 +58,16 @@ def test_csr_getcol():
         assert_array_almost_equal(arr_col, csr_col.toarray())
         assert_(type(csr_col) is csr_matrix)
 
+def test_round():
+    np.random.seed(0)
+    N = 10
+    decimals = 3
+    X = np.random.random((N, N))
+    X[X > 0.7]
+    Xcsr = csr_matrix(X)
+    RoundedXcsr = round(Xcsr, decimals)
+
+    for i in range(N):
+        arr_col = RoundedXcsr.getcol(i)
+        csr_col = Xcsr.getcol(i)
+        assert_array_almost_equal(arr_col.data, csr_col.data, decimals)

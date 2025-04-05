@@ -324,6 +324,9 @@ class csr_matrix(_cs_matrix):
             return self._get_arrayXarray(row, col)
         return self._major_index_fancy(row)._get_submatrix(minor=col)
 
+    def __round__(self, decimals=0):
+        return self._with_data(self.data.round(decimals))
+
 
 def isspmatrix_csr(x):
     """Is x of csr_matrix type?
